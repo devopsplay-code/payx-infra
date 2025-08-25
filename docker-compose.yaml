@@ -1,15 +1,16 @@
-version: "3.9"
+# No need for version in new Docker Compose, safe to remove
+# version: "3.9"
 
 services:
   api-gateway:
     container_name: api-gateway
     build:
-      context: ./payx-api-gateway
+      context: ../payx-api-gateway
     image: payx-api-gateway
     ports:
       - "4000:4000"
     env_file:
-      - ./payx-api-gateway/.env
+      - ../payx-api-gateway/.env
     depends_on:
       - auth-service
       - wallet-service
@@ -21,48 +22,48 @@ services:
   auth-service:
     container_name: auth-service
     build:
-      context: ./payx-auth-service
+      context: ../payx-auth-service
     image: payx-auth-service
     ports:
       - "4001:4001"
     env_file:
-      - ./payx-auth-service/.env
+      - ../payx-auth-service/.env
     networks:
       - payx-network
 
   wallet-service:
     container_name: wallet-service
     build:
-      context: ./payx-wallet-service
+      context: ../payx-wallet-service
     image: payx-wallet-service
     ports:
       - "4002:4002"
     env_file:
-      - ./payx-wallet-service/.env
+      - ../payx-wallet-service/.env
     networks:
       - payx-network
 
   transaction-service:
     container_name: transaction-service
     build:
-      context: ./payx-transaction-service
+      context: ../payx-transaction-service
     image: payx-transaction-service
     ports:
       - "4003:4003"
     env_file:
-      - ./payx-transaction-service/.env
+      - ../payx-transaction-service/.env
     networks:
       - payx-network
 
   history-service:
     container_name: history-service
     build:
-      context: ./payx-history-service
+      context: ../payx-history-service
     image: payx-history-service
     ports:
       - "4004:4004"
     env_file:
-      - ./payx-history-service/.env
+      - ../payx-history-service/.env
     networks:
       - payx-network
 
